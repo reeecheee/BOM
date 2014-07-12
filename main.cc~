@@ -109,9 +109,9 @@ int main()
 		std::cout << "Unable to open file"; 
 	}*/
 
-	cout << "line: " << ",Speaker(s),Speaker(s) per customer order specification" << '\n';
+	cout << "line: " << "1`,MFR820-.5,\"Resistor, 820, 1/2 watt\",," << '\n';
 	Kit testKit = Kit();
-	array<std::string, 3> toks = testKit.parseLine(",Speaker(s),Speaker(s) per customer order specification");
+	array<std::string, 3> toks = testKit.parseLine("1`,MFR820-.5,\"Resistor, 820, 1/2 watt\",,");
 
 	if(toks[0] == "Qty")
 	{

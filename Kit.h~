@@ -37,7 +37,7 @@ public:
 	Kit(); // REMOVE AFTER TESTING
 	Kit(std::string /*in*/filepath);
 	virtual ~Kit();
-	void addPart(std::string qty, std::string partNo, std::string desc); // REVISE IN DIAGRAM
+	void addPart(std::string partNo, std::string qty, std::string desc); // REVISE IN DIAGRAM
 	void appendDesc(std::string partNo, std::string desc); // ADD TO DIAGRAM
 	std::array<std::string, 3> parseLine(std::string line); // ADD TO DIAGRAM
 	std::string getKitNo();

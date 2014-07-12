@@ -122,7 +122,7 @@ Kit::Kit(std::string /*in*/filepath)
 						else // blank qty, nonblank partNo
 						{
 							std::cout << "5: ext3" << '\n'; // REMOVE AFTER TESTING
-							appendDesc(lastPart, toks[1]);
+							
 						}
 					}
 					else // nonblank & nonjunk qty
@@ -135,8 +135,6 @@ Kit::Kit(std::string /*in*/filepath)
 						else // nonblank & nonjunk qty, nonblank partNo
 						{
 							std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
-							addPart(toks[0], toks[1], toks[2]);
-							lastPart = toks[1];
 						}
 					}
 					break;
