@@ -45,11 +45,13 @@
 #include <fstream> // REMOVE AFTER TESTING
 #include <sstream> // REMOVE AFTER TESTING
 #include <boost/tokenizer.hpp> // REMOVE AFTER TESTING
+#include <boost/filesystem.hpp> // REMOVE AFTER TESTING
 #include "KitList.h"
 
 using namespace std;
 
 std::map<std::string, Part> Kit::partsCatalog; // avoid undefined reference error
+std::vector<std::string> Kit::appended; // avoid undefined reference error
 
 int main()
 {
@@ -109,9 +111,9 @@ int main()
 		std::cout << "Unable to open file"; 
 	}*/
 
-	cout << "line: " << "1`,MFR820-.5,\"Resistor, 820, 1/2 watt\",," << '\n';
+/*	cout << "line: " << ",Speaker(s),Speaker(s) per customer order specification" << '\n';
 	Kit testKit = Kit();
-	array<std::string, 3> toks = testKit.parseLine("1`,MFR820-.5,\"Resistor, 820, 1/2 watt\",,");
+	array<std::string, 3> toks = testKit.parseLine(",Speaker(s),Speaker(s) per customer order specification");
 
 	if(toks[0] == "Qty")
 	{
@@ -158,26 +160,39 @@ int main()
 		{
 			std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
 		}
-	}
+	}*/
 
+	////////////////////////
+	//KITLIST CLASS TESTING
+	////////////////////////
+
+/*	boost::filesystem::directory_iterator it ("/home/reechee/Documents/Cpp/HW5/CSV");
+
+	for(it; it != boost::filesystem::directory_iterator(); ++it)
+	{
+		cout << it->path().generic_string() << '\n';
+	}*/
+		
 	/////////////
 	//FINAL MAIN
 	/////////////
 	
-/*	KitList list1 = KitList(FILEPATH);
+	KitList list1 = KitList("/home/reechee/Documents/Cpp/HW5/CSV");
 
 	array<std::string,10> parts = {"Bolt-SKT",
 											 "FH-2",
-										  	 "CCW-5E3",
+										  	 "CCW-5E3", // description problem
 										    "Nut-#8-32",
-											 "W025130 (EU)",
+											 "W025130 (EU)", //description problem
 											 "12A150A-50",
 											 "6N-4",
-											 "MFR220K-.5",
+											 "MFR220K-.5", // bias board kit not showing up
 											 "#8 sheet metal screw",
 											 "PJP-S"};
 
-	for(int i = 0; i < 10; ++i)
+	list1.queryPart("PJP-S");
+
+/*	for(int i = 0; i < 10; ++i)
 	{
 		list1.queryPart(parts[i]);
 	}*/

@@ -15,11 +15,18 @@
 
 // include associated header file
 #include "KitList.h"
+#include "Kit.h"
 
 //CONSTRUCTOR
 KitList::KitList(std::string path)
 {
-//boost filesystem
+	boost::filesystem::directory_iterator it (path);
+
+	for(it; it != boost::filesystem::directory_iterator(); ++it)
+	{
+		Kit tempKit = Kit(it->path().generic_string());
+		this->kits.insert(make_pair(tempKit.getKitNo(), tempKit));
+	}
 }
 
 //VIRTUAL DESTRUCTOR
@@ -57,13 +64,30 @@ void KitList::appendDesc(std::string partNo, std::string desc)
 //kits which include the part and the quantity they require.
 void KitList::queryPart(std::string partNo) const
 {
-	//make bingo map to store kits containing the part and the respective quantity reqd
+	bool found = false;
+	
+	//print the partNo queried and it's description from the catalog
+	std::cout << "------------------------------------------------" << '\n';
+	std::cout << "Part: " << partNo << '\n';
+	std::map<std::string, Kit>::const_iterator iter = this->kits.begin();
+	std::cout << "Description: " << iter->second.getDesc(partNo) << '\n';
+	std::cout << "------------------------------------------------" << '\n';
 	
 	//iterate through all kits
-		//iterate through all parts in the given kit
-			//if the kit contains the part, add the kitNo and qty to bingo
+	for(auto& iter : kits)
+	{
+		if(iter.second.hasPart(partNo))
+		{
+			found = true;
+			std::cout << iter.second.getKitNo() << ", Qty: " 
+						 << iter.second.partQty(partNo) << '\n';
+		}
+	}
 
-	//print contents of bingo map
+	if(found == false)
+	{
+		std::cout << "was not found in any kits." << '\n';
+	}
 }
 
 /************************************************************

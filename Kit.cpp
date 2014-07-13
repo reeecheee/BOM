@@ -87,19 +87,19 @@ Kit::Kit(std::string /*in*/filepath)
 
 					if(toks[0] == "Qty")
 					{
-						std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
+						//std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
 						//ignore this heading line
 					}
 					else if(toks[0] == "" || toks[0] == "") // junk qty
 					{
 						if(toks[1] == "") // junk qty, blank partNo
 						{
-							std::cout << "1: ext1" << '\n'; // REMOVE AFTER TESTING
+							//std::cout << "1: ext1" << '\n'; // REMOVE AFTER TESTING
 							appendDesc(lastPart, toks[2]);
 						}
 						else // junk qty, nonblank partNo
 						{
-							std::cout << "2: var1" << '\n'; // REMOVE AFTER TESTING
+							//std::cout << "2: var1" << '\n'; // REMOVE AFTER TESTING
 							addPart("varies", toks[1], toks[2]);
 							lastPart = toks[1];
 						}
@@ -110,18 +110,18 @@ Kit::Kit(std::string /*in*/filepath)
 						{
 							if(toks[2] == "") // blank qty, blank partNo, blank desc
 							{
-								std::cout << "3: blank" << '\n'; // REMOVE AFTER TESTING
+								//std::cout << "3: blank" << '\n'; // REMOVE AFTER TESTING
 								//ignore this blank record
 							}
 							else // blank qty, blank partNo, nonblank desc
 							{
-								std::cout << "4: ext2" << '\n'; // REMOVE AFTER TESTING
+								//std::cout << "4: ext2" << '\n'; // REMOVE AFTER TESTING
 								appendDesc(lastPart, toks[2]);
 							}
 						}
 						else // blank qty, nonblank partNo
 						{
-							std::cout << "5: ext3" << '\n'; // REMOVE AFTER TESTING
+							//std::cout << "5: ext3" << '\n'; // REMOVE AFTER TESTING
 							appendDesc(lastPart, toks[1]);
 						}
 					}
@@ -130,11 +130,11 @@ Kit::Kit(std::string /*in*/filepath)
 						if(toks[1] == "") // nonblank & nonjunk qty, blank partNo
 						{
 							//ignore this record
-							std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
+							//std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
 						}
 						else // nonblank & nonjunk qty, nonblank partNo
 						{
-							std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
+							//std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
 							addPart(toks[0], toks[1], toks[2]);
 							lastPart = toks[1];
 						}
@@ -172,11 +172,33 @@ void Kit::addPart(std::string qty, std::string partNo, std::string desc)
 }
 
 //The function appendDesc() appends the passed desc string to the end of the
-//existing description string for the given part number in the partsCatalog.
+//existing description string for the given part number in the partsCatalog, IF
+//this particular part has not already been appended.
 void Kit::appendDesc(std::string partNo, std::string desc)
 {
-	std::string tempDesc = this->partsCatalog.at(partNo).getDesc();
-	this->partsCatalog.at(partNo).setDesc(tempDesc + desc);
+	if(std::find(this->appended.begin(), this->appended.end(), partNo) != this->appended.end())
+	{
+		// part description has already been appended do nothing
+	}
+	else
+	{
+		std::string tempDesc = this->partsCatalog.at(partNo).getDesc();
+		this->partsCatalog.at(partNo).setDesc(tempDesc + desc);
+		this->appended.push_back(partNo);
+	}
+}
+
+//The function hasPart() returns true if the Kit contains the passed part.
+bool Kit::hasPart(std::string partNo) const
+{
+	if(this->parts.find(partNo) == this->parts.end())
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 //The function parseLine() takes a part line from the CSV files and splits it 
@@ -239,8 +261,28 @@ std::array<std::string,3> Kit::parseLine(std::string line)
 	return toks;
 }
 
+//The function partQty() returns the quantity of the passed part required for the kit. 
+std::string Kit::partQty(std::string partNo) const
+{
+	return this->parts.at(partNo);
+}
+
+//The function getDesc() searches the parts catalog for the passed part and returns
+//the parts description if it exists.  An error message is displayed if it doesn't exist. 
+std::string Kit::getDesc(std::string partNo) const
+{
+	try
+	{
+		return this->partsCatalog.at(partNo).getDesc();
+	}
+	catch(const std::out_of_range& oor)
+	{
+		std::cerr << partNo << " is not listed in any kits." << '\n';
+	}
+}
+
 //The function getKitNo() returns the kit object's kit number as a string.
-std::string Kit::getKitNo() 
+std::string Kit::getKitNo() const
 {
 	return this->kitNo;
 }

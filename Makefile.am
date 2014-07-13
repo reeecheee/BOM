@@ -27,7 +27,6 @@ hw5_LDFLAGS =
 hw5_LDADD = 
 
 
-AM_CXXFLAGS = -std=c++11 
-
-AM_LDFLAGS = -lboost_filesystem \
-	-lboost_system 
+AM_CXXFLAGS = -std=c++11 \
+	-lboost_system \
+	-lboost_filesystem 
