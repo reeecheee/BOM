@@ -55,147 +55,23 @@ std::vector<std::string> Kit::appended; // avoid undefined reference error
 
 int main()
 {
-	////////////////////
-	//PART CLASS TESTING
-	////////////////////
-	
-/*	Part test = Part("Test Part", "This is a test part description");
-	
-	cout << "partNo: " << test.getPartNo() << '\n';
-	cout << "desc: " << test.getDesc() << '\n';
-
-	test.setPartNo("Revised Test Part");
-	test.setDesc("Revised Description");
-
-	cout << "partNo: " << test.getPartNo() << '\n';
-	cout << "desc: " << test.getDesc() << '\n';*/
-
-	///////////////////
-	//KIT CLASS TESTING
-	///////////////////
-
-	//Kit testKit = Kit("/home/reechee/Documents/Cpp/HW5/CSV/HW5-BillOfMaterialWithVBScript-5A40_Combo.csv");
-
-/*	typedef boost::tokenizer<boost::escaped_list_separator<char> > Tokenizer;
-	string line;
-	string kitNo;
-	
-	ifstream CSV;
-	CSV.open("/home/reechee/Documents/Cpp/HW5/CSV/test.csv");
-
-	if(CSV.is_open())
-	{
-		getline(CSV,line);
-		Tokenizer tok(line);
-		Tokenizer::iterator iter = tok.begin();
-		kitNo = *iter;
-		//cout << "XXX" << kitNo << "XXX" <<'\n';
-
-		//get(CSV,line);
-		cout << "XXX" << line << "XXX" <<'\n';*/
-		
-/*		while(getline(CSV, line))
-		{
-			cout<<line << '\n';
-			Tokenizer tok(line);
-
-			for(Tokenizer::iterator iter = tok.begin(); iter != tok.end(); ++iter)
-			{
-				cout << *iter << '\n';
-			}
-		}
-		//CSV.close();
-	}
-	else 
-	{
-		std::cout << "Unable to open file"; 
-	}*/
-
-/*	cout << "line: " << ",Speaker(s),Speaker(s) per customer order specification" << '\n';
-	Kit testKit = Kit();
-	array<std::string, 3> toks = testKit.parseLine(",Speaker(s),Speaker(s) per customer order specification");
-
-	if(toks[0] == "Qty")
-	{
-		std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
-		//ignore this heading line
-	}
-	else if(toks[0] == "" || toks[0] == "") // junk qty
-	{
-		if(toks[1] == "") // junk qty, blank partNo
-		{
-			std::cout << "1: ext1" << '\n'; // REMOVE AFTER TESTING
-		}
-		else // junk qty, nonblank partNo
-		{
-			std::cout << "2: var1" << '\n'; // REMOVE AFTER TESTING
-		}
-	}
-	else if(toks[0] == "") // blank qty
-	{
-		if(toks[1] == "") // blank qty, blank partNo
-		{
-			if(toks[2] == "") // blank qty, blank partNo, blank desc
-			{
-				std::cout << "3: blank" << '\n'; // REMOVE AFTER TESTING
-			}
-			else // blank qty, blank partNo, nonblank desc
-			{
-				std::cout << "4: ext2" << '\n'; // REMOVE AFTER TESTING
-			}
-		}
-		else // blank qty, nonblank partNo
-		{
-			std::cout << "5: ext3" << '\n'; // REMOVE AFTER TESTING
-		}
-	}
-	else // nonblank & nonjunk qty
-	{
-		if(toks[1] == "") // nonblank & nonjunk qty, blank partNo
-		{
-			//ignore this record
-			std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
-		}
-		else // nonblank & nonjunk qty, nonblank partNo
-		{
-			std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
-		}
-	}*/
-
-	////////////////////////
-	//KITLIST CLASS TESTING
-	////////////////////////
-
-/*	boost::filesystem::directory_iterator it ("/home/reechee/Documents/Cpp/HW5/CSV");
-
-	for(it; it != boost::filesystem::directory_iterator(); ++it)
-	{
-		cout << it->path().generic_string() << '\n';
-	}*/
-		
-	/////////////
-	//FINAL MAIN
-	/////////////
-	
 	KitList list1 = KitList("/home/reechee/Documents/Cpp/HW5/CSV");
 
 	array<std::string,10> parts = {"Bolt-SKT",
 											 "FH-2",
-										  	 "CCW-5E3", // description problem
+										  	 "CCW-5E3",
 										    "Nut-#8-32",
-											 "W025130 (EU)", // description problem
+											 "W025130 (EU)",
 											 "12A150A-50",
 											 "6N-4",
-											 "MFR220K-.5", // bias board kit not showing up
+											 "MFR220K-.5",
 											 "#8 sheet metal screw",
 											 "PJP-S"};
 
-	list1.queryPart("PJP-S");
-
-/*	for(int i = 0; i < 10; ++i)
+	for(int i = 0; i < 10; ++i)
 	{
 		list1.queryPart(parts[i]);
-	}*/
+	}
 
 	return 0;
 }

@@ -27,7 +27,6 @@
 #include <map>
 #include <vector>
 #include <fstream>
-#include <boost/tokenizer.hpp> //REMOVE IF UNUSED
 #include "Part.h"
 
 class Kit 
@@ -35,15 +34,15 @@ class Kit
 
 public:
 
-	Kit(); // REMOVE AFTER TESTING
+	Kit();
 	Kit(std::string /*in*/filepath);
 	virtual ~Kit();
-	void addPart(std::string qty, std::string partNo, std::string desc); // REVISE IN DIAGRAM
-	void appendDesc(std::string partNo, std::string desc); // ADD TO DIAGRAM
-	bool hasPart(std::string partNo) const; // ADD TO DIAGRAM
-	std::array<std::string, 3> parseLine(std::string line); // ADD TO DIAGRAM
-	std::string partQty(std::string partNo) const; // ADD TO DIAGRAM
-	std::string getDesc(std::string partNo) const; //ADD TO DIAGRAM
+	void addPart(std::string qty, std::string partNo, std::string desc);
+	void appendDesc(std::string partNo, std::string desc);
+	bool hasPart(std::string partNo) const;
+	std::array<std::string, 3> parseLine(std::string line);
+	std::string partQty(std::string partNo) const;
+	std::string getDesc(std::string partNo) const;
 	std::string getKitNo() const;
 	void setKitNo(std::string /*in*/kitNo);
 
@@ -51,8 +50,8 @@ private:
 
 	std::string kitNo;
 	std::map<std::string, std::string> parts;
-	static std::map<std::string, Part> partsCatalog; // ADD TO DIAGRAM
-	static std::vector<std::string> appended; // ADD TO DIAGRAM
+	static std::map<std::string, Part> partsCatalog;
+	static std::vector<std::string> appended;
 
 };
 

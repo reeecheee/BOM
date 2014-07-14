@@ -25,6 +25,7 @@
 #include <sstream>
 #include <string>
 #include <map>
+#include <vector>
 #include <fstream>
 #include <boost/tokenizer.hpp> //REMOVE IF UNUSED
 #include "Part.h"

@@ -87,7 +87,6 @@ Kit::Kit(std::string /*in*/filepath)
 
 					if(toks[0] == "Qty")
 					{
-						//std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
 						//ignore this heading line
 					}
 					else if(toks[0] == "" || toks[0] == "") // junk qty
@@ -99,7 +98,6 @@ Kit::Kit(std::string /*in*/filepath)
 						}
 						else // junk qty, nonblank partNo
 						{
-							//std::cout << "2: var1" << '\n'; // REMOVE AFTER TESTING
 							addPart("varies", toks[1], toks[2]);
 							lastPart = toks[1];
 						}
@@ -110,18 +108,15 @@ Kit::Kit(std::string /*in*/filepath)
 						{
 							if(toks[2] == "") // blank qty, blank partNo, blank desc
 							{
-								//std::cout << "3: blank" << '\n'; // REMOVE AFTER TESTING
 								//ignore this blank record
 							}
 							else // blank qty, blank partNo, nonblank desc
 							{
-								//std::cout << "4: ext2" << '\n'; // REMOVE AFTER TESTING
 								appendDesc(lastPart, toks[2]);
 							}
 						}
 						else // blank qty, nonblank partNo
 						{
-							//std::cout << "5: ext3" << '\n'; // REMOVE AFTER TESTING
 							appendDesc(lastPart, toks[1]);
 						}
 					}
@@ -130,11 +125,9 @@ Kit::Kit(std::string /*in*/filepath)
 						if(toks[1] == "") // nonblank & nonjunk qty, blank partNo
 						{
 							//ignore this record
-							//std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
 						}
 						else // nonblank & nonjunk qty, nonblank partNo
 						{
-							//std::cout << "6: std" << '\n'; // REMOVE AFTER TESTING
 							addPart(toks[0], toks[1], toks[2]);
 							lastPart = toks[1];
 						}
@@ -211,9 +204,7 @@ std::array<std::string,3> Kit::parseLine(std::string line)
 	std::stringstream ss; //stream to feed chars of tokens into
 	
 	for(char& c : line) // iterate through line, char by char
-	{
-		//std::cout << "c: " << c << '\n'; //REMOVE AFTER TESTING
-		
+	{		
 		if(quoteTok == false) // iterating through a qty or partNo?
 		{
 	 		if(c != ',' && c != '"') // char belongs in token

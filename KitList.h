@@ -32,13 +32,10 @@ public:
 	virtual ~KitList();
 
 	void addKit(std::string kitNo);
-	void addPart(std::string partNo, std::string desc); // REMOVE FROM DIAGRAM?
-	void appendDesc(std::string partNo, std::string desc); // REMOVE FROM DIAGRAM?
 	void queryPart(std::string partNo) const;
 
 private:
 	
-	//std::map<std::string, Part> parts; // MOVE TO A STATIC MEMBER OF KIT CLASS?
 	std::map<std::string, Kit> kits;
 	
 };

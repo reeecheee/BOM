@@ -70,8 +70,7 @@ void KitList::queryPart(std::string partNo) const
 	std::cout << "------------------------------------------------" << '\n';
 	std::cout << "Part: " << partNo << '\n';
 	std::map<std::string, Kit>::const_iterator iter = this->kits.begin();
-	std::cout << "Description: ";
-	std::cout << iter->second.getDesc(partNo) << '\n';
+	std::cout << "Description: " << iter->second.getDesc(partNo) << '\n';
 	std::cout << "------------------------------------------------" << '\n';
 	
 	//iterate through all kits

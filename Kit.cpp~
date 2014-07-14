@@ -87,7 +87,6 @@ Kit::Kit(std::string /*in*/filepath)
 
 					if(toks[0] == "Qty")
 					{
-						//std::cout << "ignore" << '\n'; // REMOVE AFTER TESTING
 						//ignore this heading line
 					}
 					else if(toks[0] == "" || toks[0] == "") // junk qty
@@ -178,7 +177,7 @@ void Kit::appendDesc(std::string partNo, std::string desc)
 {
 	if(std::find(this->appended.begin(), this->appended.end(), partNo) != this->appended.end())
 	{
-		// do nothing
+		// part description has already been appended do nothing
 	}
 	else
 	{
